@@ -7,5 +7,11 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="ru.binnyatoff.avitointerntest.screens.Main.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="ru.binnyatoff.avitointerntest.screens.Search.SearchFragment"
+        android:label="SearchFragment">
+    </fragment>
 </navigation>

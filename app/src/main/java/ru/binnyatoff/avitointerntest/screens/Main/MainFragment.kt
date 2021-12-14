@@ -15,9 +15,23 @@ class MainFragment:Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val temperature:TextView = view.findViewById(R.id.temperature)
-        viewModel.temperature.observe(viewLifecycleOwner,{
-            temperature.text = "${floor(it).toInt()}"
+        val temp:TextView = view.findViewById(R.id.temp)
+        val humidity:TextView = view.findViewById(R.id.humidity)
+        val wind:TextView = view.findViewById(R.id.wind)
+        val location:TextView = view.findViewById(R.id.location)
+
+
+        viewModel.temp.observe(viewLifecycleOwner,{
+            temp.text = "${floor(it).toInt()}"
+        })
+        viewModel.humidity.observe(viewLifecycleOwner,{
+            humidity.text = it.toString()
+        })
+        viewModel.wind.observe(viewLifecycleOwner,{
+            wind.text = it.toString()
+        })
+        viewModel.location.observe(viewLifecycleOwner,{
+            location.text = it.toString()
         })
     }
 }

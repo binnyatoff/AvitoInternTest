@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">AvitoInternTest</string>
+    <string name="location">Location</string>
+    <string name="data">Data</string>
+    <string name="temp_text">Temp</string>
+    <string name="temp">0⁰С</string>
+    <string name="humidity_text">Humidity</string>
+    <string name="humidity">0%</string>
+    <string name="wind_text">Wind</string>
+    <string name="wind">0km/h</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
 </resources>
