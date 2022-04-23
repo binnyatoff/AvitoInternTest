@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest.screens.Search
+package ru.binnyatoff.WeatherApp.screens.Search
 
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import ru.binnyatoff.avitointerntest.R
-import java.lang.Math.floor
+import ru.binnyatoff.WeatherApp.R
 
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -26,18 +25,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val location: TextView = view.findViewById(R.id.search_location)
 
 
-        searchViewModel.temp.observe(viewLifecycleOwner,{
-            temp.text = "${floor(it).toInt()}"
-        })
-        searchViewModel.humidity.observe(viewLifecycleOwner,{
+        searchViewModel.temp.observe(viewLifecycleOwner) {
+            temp.text = "${kotlin.math.floor(it).toInt()}"
+        }
+        searchViewModel.humidity.observe(viewLifecycleOwner) {
             humidity.text = it.toString()
-        })
-        searchViewModel.wind.observe(viewLifecycleOwner,{
+        }
+        searchViewModel.wind.observe(viewLifecycleOwner) {
             wind.text = it.toString()
-        })
-        searchViewModel.location.observe(viewLifecycleOwner,{
+        }
+        searchViewModel.location.observe(viewLifecycleOwner) {
             location.text = it.toString()
-        })
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {

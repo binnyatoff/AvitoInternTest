@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest.di
+package ru.binnyatoff.WeatherApp.di
 
 import dagger.Module
 import dagger.Provides
@@ -8,8 +8,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
-import ru.binnyatoff.avitointerntest.Constants
-import ru.binnyatoff.avitointerntest.retrofit.Api
+import ru.binnyatoff.WeatherApp.Constants
+import ru.binnyatoff.WeatherApp.retrofit.Api
 import javax.inject.Singleton
 
 @Module

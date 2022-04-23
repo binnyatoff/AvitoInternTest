@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest
+package ru.binnyatoff.WeatherApp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

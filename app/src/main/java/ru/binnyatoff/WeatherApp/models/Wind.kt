@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest.models
+package ru.binnyatoff.WeatherApp.models
 
 data class Wind(
     val deg: Int,

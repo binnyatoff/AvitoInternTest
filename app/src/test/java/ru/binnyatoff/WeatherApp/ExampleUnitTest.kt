@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest
+package ru.binnyatoff.WeatherApp
 
 import org.junit.Test
 

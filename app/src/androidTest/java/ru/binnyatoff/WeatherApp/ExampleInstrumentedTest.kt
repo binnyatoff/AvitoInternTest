@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest
+package ru.binnyatoff.WeatherApp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

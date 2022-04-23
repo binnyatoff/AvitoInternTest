@@ -1,4 +1,4 @@
-package ru.binnyatoff.avitointerntest.screens
+package ru.binnyatoff.WeatherApp.screens
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,8 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import ru.binnyatoff.avitointerntest.R
-
+import ru.binnyatoff.WeatherApp.R
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
