@@ -2,16 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="ru.binnyatoff.WeatherApp.screens.Main.MainFragment"
-        android:label="MainFragment" >
-    </fragment>
+        android:name="ru.binnyatoff.WeatherApp.screens.home.HomeFragment"
+        android:label="MainFragment" />
+
     <fragment
         android:id="@+id/searchFragment"
-        android:name="ru.binnyatoff.WeatherApp.screens.Search.SearchFragment"
-        android:label="SearchFragment">
+        android:name="ru.binnyatoff.WeatherApp.screens.search.SearchFragment"
+        android:label="SearchFragment" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="ru.binnyatoff.WeatherApp.screens.splash.SplashFragment"
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/dailyFragment"
+        android:name="ru.binnyatoff.WeatherApp.screens.daily.DailyFragment"
+        android:label="DailyFragment" />
+
 </navigation>

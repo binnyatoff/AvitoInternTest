@@ -3,107 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#05071b">
-
-
-    <SearchView
-        android:id="@+id/search_view"
-        android:layout_margin="25sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    android:background="@color/background">
 
     <TextView
-        android:id="@+id/search_location"
+        android:id="@+id/pick_location_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/location"
+        android:layout_marginTop="45dp"
+        android:text="@string/pick_a_location"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@id/search_temp_text"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/search_data"
+        android:id="@+id/pick_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/data"
+        android:gravity="center"
+        android:text="@string/pick_description"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_location" />
+        app:layout_constraintTop_toBottomOf="@id/pick_location_text" />
 
-
-    <TextView
-        android:id="@+id/search_temp_text"
+    <SearchView
+        android:id="@+id/search_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/temp_text"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@id/search_temp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/search_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/temp"
-        android:textColor="@color/white"
-        android:textSize="55sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/search_view_style"
+        android:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/pick_description" />
 
-    <TextView
-        android:id="@+id/search_humidity_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:hint="@string/humidity_text"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toStartOf="@id/search_wind_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_temp" />
-
-    <TextView
-        android:id="@+id/search_humidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/humidity"
-        android:textColor="@color/white"
-        android:textSize="55sp"
-        app:layout_constraintEnd_toStartOf="@id/search_wind"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_humidity_text" />
-
-    <TextView
-        android:id="@+id/search_wind_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="55sp"
-        android:hint="@string/wind_text"
-        android:textColorHint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/search_humidity_text"
-        app:layout_constraintTop_toBottomOf="@id/search_temp" />
-
-    <TextView
-        android:id="@+id/search_wind"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/wind"
-        android:textColor="@color/white"
-        android:textSize="55sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/search_humidity"
-        app:layout_constraintTop_toBottomOf="@id/search_humidity_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

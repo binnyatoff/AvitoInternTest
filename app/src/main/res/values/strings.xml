@@ -1,13 +1,19 @@
 <resources>
-    <string name="app_name">AvitoInternTest</string>
+    <string name="app_name">WeatherApp</string>
     <string name="location">Location</string>
     <string name="data">Data</string>
     <string name="temp_text">Temp</string>
-    <string name="temp">0⁰С</string>
+    <string name="temp">0</string>
     <string name="humidity_text">Humidity</string>
-    <string name="humidity">0%</string>
+    <string name="humidity">0</string>
+    <string name="humidity_percent">%</string>
     <string name="wind_text">Wind</string>
-    <string name="wind">0km/h</string>
+    <string name="wind">0</string>
+    <string name="wind_km">km/h</string>
     <string name="home">Home</string>
     <string name="search">Search</string>
+    <string name="temp_c">⁰С</string>
+    <string name="forcast">Forcast</string>
+    <string name="pick_a_location">Pick a location</string>
+    <string name="pick_description">Type the area or city you want to know the \n detailed weather information \n at this time.</string>
 </resources>
