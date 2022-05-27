@@ -1,4 +1,4 @@
-package ru.binnyatoff.WeatherApp.data.network
+package ru.binnyatoff.WeatherApp.data
 
 import android.annotation.SuppressLint
 import ru.binnyatoff.WeatherApp.data.model.Daily
@@ -8,6 +8,21 @@ import ru.binnyatoff.WeatherApp.data.network.modelsDaily.DailyDTO
 import ru.binnyatoff.WeatherApp.data.network.modelsDaily.WeatherDailyDTO
 import ru.binnyatoff.WeatherApp.data.network.modelsDay.Model
 import java.text.SimpleDateFormat
+
+@SuppressLint("SimpleDateFormat")
+fun getDateTime(s: Int): String {
+    val sdf = SimpleDateFormat("dd:MM:yyyy")
+    return sdf.format(s.toLong() * 1000)
+}
+
+fun ListDailyDTOtoDaily(listDTO: List<DailyDTO>) :List<Daily>{
+    val list: MutableList<Daily> = mutableListOf()
+    listDTO.forEach {
+        list.add(it.toDaily())
+    }
+    return list
+}
+
 
 fun Model.toResult(): WeatherResult {
     return WeatherResult(
@@ -29,29 +44,14 @@ fun DailyDTO.toDaily(): Daily {
     )
 }
 
-@SuppressLint("SimpleDateFormat")
-fun getDateTime(s: Int): String {
-    val sdf = SimpleDateFormat("dd:MM:yyyy")
-    return sdf.format(s.toLong() * 1000)
-}
-
-fun ListDailyDTOtoDaily(listDTO: List<DailyDTO>) :List<Daily>{
-    val list: MutableList<Daily> = mutableListOf()
-    listDTO.forEach {
-        list.add(it.toDaily())
-    }
-    return list
-}
-
 fun WeatherDailyDTO.toWeatherDaily(): WeatherDaily {
     val listdaily = ListDailyDTOtoDaily(daily)
-    val result = WeatherDaily(
+    return WeatherDaily(
         daily = listdaily,
         lat = lat,
         lon = lon,
         timezone = timezone,
         timezone_offset = timezone_offset
     )
-    return result
 }
 

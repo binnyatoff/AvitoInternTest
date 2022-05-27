@@ -7,7 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.binnyatoff.WeatherApp.R
-import ru.binnyatoff.WeatherApp.appComponent
+//import ru.binnyatoff.WeatherApp.appComponent
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

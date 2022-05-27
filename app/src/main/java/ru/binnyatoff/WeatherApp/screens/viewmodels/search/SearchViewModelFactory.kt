@@ -1,4 +1,4 @@
-package ru.binnyatoff.WeatherApp.screens.viewmodels
+package ru.binnyatoff.WeatherApp.screens.viewmodels.search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

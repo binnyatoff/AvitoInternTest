@@ -5,14 +5,14 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 
-class AppInterceptor(private val apiKey: String):Interceptor {
+class AppInterceptor(private val apiKey: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val url: HttpUrl = chain.request().url
             .newBuilder()
             .addQueryParameter(API_KEY_HEADER, apiKey)
             .build()
         val request = chain.request().newBuilder().url(url)
-            .addHeader(API_KEY_HEADER, apiKey)
+            // .addHeader(API_KEY_HEADER, apiKey)
             .build()
 
         return chain.proceed(request)

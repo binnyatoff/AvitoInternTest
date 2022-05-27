@@ -1,17 +1,18 @@
-package ru.binnyatoff.WeatherApp.screens.viewmodels
+package ru.binnyatoff.WeatherApp.screens.viewmodels.daily
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import ru.binnyatoff.WeatherApp.data.WeatherRepository
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.binnyatoff.WeatherApp.data.WeatherRepository
 import ru.binnyatoff.WeatherApp.data.model.Daily
-import ru.binnyatoff.WeatherApp.data.network.toWeatherDaily
+import ru.binnyatoff.WeatherApp.data.toWeatherDaily
 
-class DailyViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
 
-    val weatherDailyList = MutableLiveData<List<Daily>>()
+class DailyViewModelFlow(private val weatherRepository: WeatherRepository):ViewModel(){
+
+    val weatherDailyList:MutableStateFlow<List<Daily>> = MutableStateFlow(emptyList())
 
     init {
         getWeatherDaily()
@@ -21,13 +22,13 @@ class DailyViewModel(private val weatherRepository: WeatherRepository) : ViewMod
         viewModelScope.launch {
             try {
                 val response = weatherRepository.getWeatherDaily()
-                Log.e("TAG", "Response" + response.toString())
+                Log.e("TAG", "Response$response")
                 if (response.isSuccessful) {
                     val body = response.body()?.toWeatherDaily()?.daily
                     if (body != null) {
-                        weatherDailyList.postValue(body!!)
+                        weatherDailyList.value = body
+                       // weatherDailyList.value(body)
                         Log.e("TAG", body.toString())
-
                     }
                 }
             } catch (e: Exception) {
@@ -35,4 +36,5 @@ class DailyViewModel(private val weatherRepository: WeatherRepository) : ViewMod
             }
         }
     }
+    
 }

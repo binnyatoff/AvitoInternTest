@@ -1,8 +1,9 @@
 package ru.binnyatoff.WeatherApp.data.network
 
 import retrofit2.Response
-import retrofit2.http.*
-import ru.binnyatoff.WeatherApp.data.model.WeatherDaily
+import retrofit2.http.GET
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 import ru.binnyatoff.WeatherApp.data.network.modelsDaily.WeatherDailyDTO
 import ru.binnyatoff.WeatherApp.data.network.modelsDay.Model
 

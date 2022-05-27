@@ -1,4 +1,4 @@
-package ru.binnyatoff.WeatherApp.screens.viewmodels
+package ru.binnyatoff.WeatherApp.screens.viewmodels.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -6,7 +6,7 @@ import ru.binnyatoff.WeatherApp.data.WeatherRepository
 import javax.inject.Inject
 
 
-class HomeViewModelFactory @Inject constructor(var weatherRepository: WeatherRepository) :
+class HomeViewModelFactory @Inject constructor(private var weatherRepository: WeatherRepository) :
     ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

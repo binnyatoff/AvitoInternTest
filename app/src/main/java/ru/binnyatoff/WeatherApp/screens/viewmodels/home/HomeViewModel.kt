@@ -1,4 +1,4 @@
-package ru.binnyatoff.WeatherApp.screens.viewmodels
+package ru.binnyatoff.WeatherApp.screens.viewmodels.home
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.binnyatoff.WeatherApp.data.WeatherRepository
-import ru.binnyatoff.WeatherApp.data.network.toResult
+import ru.binnyatoff.WeatherApp.data.toResult
 import ru.binnyatoff.WeatherApp.screens.home.HomeState
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +14,7 @@ import java.util.*
 class HomeViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
 
     val state = MutableLiveData<HomeState>(HomeState.Loading)
-    var currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+    private var currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 
 
     init {

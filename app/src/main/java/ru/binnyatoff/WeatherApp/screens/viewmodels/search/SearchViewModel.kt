@@ -1,4 +1,4 @@
-package ru.binnyatoff.WeatherApp.screens.viewmodels
+package ru.binnyatoff.WeatherApp.screens.viewmodels.search
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -10,8 +10,8 @@ import ru.binnyatoff.WeatherApp.data.network.Api
 class SearchViewModel (private val api:Api): ViewModel() {
     val temp = MutableLiveData<Double>()
     val humidity = MutableLiveData<Int>()
-    val wind = MutableLiveData<Double>()
-    val location = MutableLiveData<String>()
+    private val wind = MutableLiveData<Double>()
+    private val location = MutableLiveData<String>()
 
     fun getCityWeather(city:String){
         viewModelScope.launch {

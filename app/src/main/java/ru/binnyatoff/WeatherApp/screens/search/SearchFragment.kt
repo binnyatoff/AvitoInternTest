@@ -11,17 +11,15 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.binnyatoff.WeatherApp.R
 import ru.binnyatoff.WeatherApp.appComponent
 import ru.binnyatoff.WeatherApp.databinding.FragmentSearchBinding
-import ru.binnyatoff.WeatherApp.screens.viewmodels.SearchViewModel
-import ru.binnyatoff.WeatherApp.screens.viewmodels.SearchViewModelFactory
+import ru.binnyatoff.WeatherApp.screens.viewmodels.search.SearchViewModel
+import ru.binnyatoff.WeatherApp.screens.viewmodels.search.SearchViewModelFactory
 import javax.inject.Inject
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     @Inject
     lateinit var searchViewModelFactory: SearchViewModelFactory
-    lateinit var searchViewModel: SearchViewModel
+    private lateinit var searchViewModel: SearchViewModel
     private val binding: FragmentSearchBinding by viewBinding()
-
-
     override fun onAttach(context: Context) {
         context.appComponent.inject(this)
         super.onAttach(context)

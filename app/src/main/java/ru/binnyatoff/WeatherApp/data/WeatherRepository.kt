@@ -8,7 +8,7 @@ import ru.binnyatoff.WeatherApp.data.network.modelsDaily.WeatherDailyDTO
 import ru.binnyatoff.WeatherApp.data.network.modelsDay.Model
 import ru.binnyatoff.WeatherApp.screens.home.GPS
 
-class WeatherRepository(val api:Api, private val gps: GPS) {
+class WeatherRepository(private val api:Api, private val gps: GPS) {
 
    suspend fun getWeather(): Response<Model> {
         val coordinates = getCoordinates(gps.getLocate())

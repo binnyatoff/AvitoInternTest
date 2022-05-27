@@ -6,8 +6,8 @@ import dagger.Provides
 import ru.binnyatoff.WeatherApp.data.WeatherRepository
 import ru.binnyatoff.WeatherApp.data.network.Api
 import ru.binnyatoff.WeatherApp.screens.home.GPS
-import ru.binnyatoff.WeatherApp.screens.viewmodels.DailyViewModelFactory
-import ru.binnyatoff.WeatherApp.screens.viewmodels.HomeViewModelFactory
+import ru.binnyatoff.WeatherApp.screens.viewmodels.daily.DailyViewModelFactory
+import ru.binnyatoff.WeatherApp.screens.viewmodels.home.HomeViewModelFactory
 
 @Module
 class AppModule {

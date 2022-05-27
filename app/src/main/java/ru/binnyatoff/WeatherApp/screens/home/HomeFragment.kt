@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import ru.binnyatoff.WeatherApp.R
 import ru.binnyatoff.WeatherApp.appComponent
 import ru.binnyatoff.WeatherApp.databinding.FragmentHomeBinding
-import ru.binnyatoff.WeatherApp.screens.viewmodels.HomeViewModel
-import ru.binnyatoff.WeatherApp.screens.viewmodels.HomeViewModelFactory
+import ru.binnyatoff.WeatherApp.screens.viewmodels.home.HomeViewModel
+import ru.binnyatoff.WeatherApp.screens.viewmodels.home.HomeViewModelFactory
 import javax.inject.Inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
