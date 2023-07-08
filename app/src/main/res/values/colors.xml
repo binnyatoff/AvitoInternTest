@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#8782b0</color>
     <color name="view_color">#ada7e2</color>
+
+
+    <color name="Charcoal">#3B4758</color>
+    <color name="YankeesBlue">#172435</color>
+    <color name="Water">#CCE4FD</color>
+    <color name="BlizzardBlue">#3B4758</color>
 </resources>

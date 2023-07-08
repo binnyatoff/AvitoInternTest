@@ -39,6 +39,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    namespace = "ru.binnyatoff.weatherapp"
 }
 
 dependencies {
@@ -60,6 +61,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     //Dagger
     implementation("com.google.dagger:dagger:2.41")
+    implementation("com.google.android.gms:play-services-location:19.0.1")
     kapt("com.google.dagger:dagger-compiler:2.41")
     //ViewBinding
     implementation("com.github.kirich1409:viewbindingpropertydelegate:1.5.6")

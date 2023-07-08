@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/bottom_navigation_style.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.37" />
+        <entry key="app/src/main/res/drawable/ic_cloudy_day.xml" value="0.273" />
+        <entry key="app/src/main/res/drawable/ic_cloudy_day_1.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.273" />
+        <entry key="app/src/main/res/drawable/ic_splashscreen_logo.xml" value="0.273" />
+        <entry key="app/src/main/res/drawable/ic_test.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/ic_vector.xml" value="0.2865" />
+        <entry key="app/src/main/res/drawable/ic_weather.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/search_view_style.xml" value="0.273" />
         <entry key="app/src/main/res/drawable/texfield_searchview_holo_light.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/drawable/vector.xml" value="0.22" />
@@ -21,10 +26,11 @@
         <entry key="app/src/main/res/layout/weather_item.xml" value="0.4752716064453125" />
         <entry key="app/src/main/res/menu-v26/bottom_navigation_menu.xml" value="0.3770833333333333" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3770833333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.273" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
