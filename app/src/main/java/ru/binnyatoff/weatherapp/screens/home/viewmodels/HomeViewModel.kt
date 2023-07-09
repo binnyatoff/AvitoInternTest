@@ -1,6 +1,7 @@
 package ru.binnyatoff.weatherapp.screens.home.viewmodels
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +18,10 @@ import java.util.*
 
 class HomeViewModel(private val weatherRepository: Repository, private val gps: GPS) : ViewModel() {
 
-    val state = MutableLiveData<HomeState>(HomeState.Loading)
+    private val _state = MutableLiveData<HomeState>(HomeState.Loading)
+    val state : LiveData<HomeState> = _state
+
+
     private var currentDate: String =
         SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 
@@ -36,6 +40,7 @@ class HomeViewModel(private val weatherRepository: Repository, private val gps: 
     }
 
     private suspend fun getWeather(coordinates: Coordinates) {
+        _state.postValue(HomeState.Loading)
         try {
             val response: Response<CurrentWeatherDTO> =
                 weatherRepository.getCurrentWeather(coordinates)
@@ -43,7 +48,7 @@ class HomeViewModel(private val weatherRepository: Repository, private val gps: 
             if (response.isSuccessful) {
                 val body = response.body()?.toCurrentWeather()
                 if (body != null) {
-                    state.postValue(
+                    _state.postValue(
                         HomeState.Loaded(
                             icon = body.icon,
                             temp = body.temp,
@@ -54,11 +59,11 @@ class HomeViewModel(private val weatherRepository: Repository, private val gps: 
                         )
                     )
                 } else {
-                    state.postValue(HomeState.Empty)
+                    _state.postValue(HomeState.Empty)
                 }
             }
         } catch (e: Exception) {
-            state.postValue(HomeState.Error(e.toString()))
+            _state.postValue(HomeState.Error(e.toString()))
         }
     }
 

@@ -10,18 +10,40 @@ import ru.binnyatoff.weatherapp.data.DailyMap
 import ru.binnyatoff.weatherapp.data.Repository
 import ru.binnyatoff.weatherapp.data.models.Coordinates
 import ru.binnyatoff.weatherapp.data.toDailyMap
+import ru.binnyatoff.weatherapp.screens.GPS
+import java.lang.Error
 
-class DailyViewModel(private val repository: Repository) : ViewModel() {
+sealed class DailyState() {
+    object Loading : DailyState()
+    data class Loaded(
+        val data: List<DailyMap>,
+    ) : DailyState()
 
-    private val _weatherDailyList = MutableLiveData<List<DailyMap>>()
-    val weatherDailyList: LiveData<List<DailyMap>> = _weatherDailyList
+    object Empty : DailyState()
+    data class Error(val error: String) : DailyState()
+}
 
+class DailyViewModel(private val repository: Repository, private val gps: GPS) : ViewModel() {
 
-    private fun getLocate(){
+    private val _state = MutableLiveData<DailyState>()
+    val state: LiveData<DailyState> = _state
 
+    init {
+        getCoordinates()
+    }
+
+    private fun getCoordinates() {
+        viewModelScope.launch {
+            gps.getLocate()
+            gps.coordinates.collect { coordinates ->
+                Log.e("TAG", "$coordinates")
+                getWeatherDaily(coordinates)
+            }
+        }
     }
 
     private fun getWeatherDaily(coordinates: Coordinates) {
+        _state.postValue(DailyState.Loading)
         viewModelScope.launch {
             try {
                 val response = repository.getDailyWeather(coordinates)
@@ -29,21 +51,19 @@ class DailyViewModel(private val repository: Repository) : ViewModel() {
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
-                        _weatherDailyList.postValue(body.toDailyMap())
-                        Log.e("TAG", body.toString())
+                        val data = body.toDailyMap()
+                        _state.postValue(
+                            DailyState.Loaded(data)
+                        )
                     } else {
                         throw NullPointerException("body is null")
                     }
                 } else {
-                    Log.e(TAG, response.code().toString())
+                    Log.e("Error response", response.code().toString())
                 }
             } catch (e: Exception) {
-                Log.e("TAG", e.toString())
+                _state.postValue(DailyState.Error(e.toString()))
             }
         }
-    }
-
-    companion object {
-        const val TAG = "TAG"
     }
 }

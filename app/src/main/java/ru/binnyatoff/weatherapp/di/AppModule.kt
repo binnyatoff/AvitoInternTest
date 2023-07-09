@@ -31,8 +31,8 @@ class AppModule {
 
 
     @Provides
-    fun provideDailyViewModelFactory(repository: Repository): DailyViewModelFactory {
-        return DailyViewModelFactory(repository)
+    fun provideDailyViewModelFactory(repository: Repository, gps: GPS): DailyViewModelFactory {
+        return DailyViewModelFactory(repository, gps)
     }
 
 }

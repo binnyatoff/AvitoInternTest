@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ru.binnyatoff.weatherapp.data.DailyMap
 
 import ru.binnyatoff.weatherapp.data.modelsDTO.Daily
 import ru.binnyatoff.weatherapp.databinding.WeatherItemBinding
 
 
-class DailyAdapter : ListAdapter<Daily, DailyViewHolder>(DailyDiffUtil) {
+class DailyAdapter : ListAdapter<DailyMap, DailyViewHolder>(DailyDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyViewHolder {
         return DailyViewHolder(
@@ -31,28 +33,29 @@ class DailyAdapter : ListAdapter<Daily, DailyViewHolder>(DailyDiffUtil) {
 class DailyViewHolder(private val binding: WeatherItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(currentWeatherDaily: Daily?) {
+    fun bind(currentWeatherDaily: DailyMap) {
         if (currentWeatherDaily != null) {
-            binding.date.text = currentWeatherDaily.dt.toString()
+            binding.date.text = currentWeatherDaily.dt
             binding.temp.text = currentWeatherDaily.temp.max.toString()
+            binding.day.text = currentWeatherDaily.pressure.toString()
 
-          //  val url = "http://openweathermap.org/img/wn/${currentWeatherDaily.icon}@2x.png"  //Надо бы вынести куда-нибудь, а не хранить ссылку здесь(Mapper)
+            val url = currentWeatherDaily.icon
 
-            //Glide
-              //  .with(itemView)
-                //.load(url)
-                //.into(binding.image)
+            Glide
+                .with(itemView)
+                .load(url)
+                .into(binding.image)
         }
     }
 }
 
 object DailyDiffUtil :
-    DiffUtil.ItemCallback<Daily>() {
-    override fun areItemsTheSame(oldItem: Daily, newItem: Daily): Boolean {
+    DiffUtil.ItemCallback<DailyMap>() {
+    override fun areItemsTheSame(oldItem: DailyMap, newItem: DailyMap): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: Daily, newItem: Daily): Boolean {
+    override fun areContentsTheSame(oldItem: DailyMap, newItem: DailyMap): Boolean {
         return oldItem.temp == newItem.temp &&
                 oldItem.humidity == newItem.humidity &&
                 oldItem.pressure == newItem.pressure
