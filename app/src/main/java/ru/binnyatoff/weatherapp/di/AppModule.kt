@@ -3,19 +3,18 @@ package ru.binnyatoff.weatherapp.di
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ru.binnyatoff.weatherapp.App
 import ru.binnyatoff.weatherapp.data.Repository
-import ru.binnyatoff.weatherapp.screens.GPS
 import ru.binnyatoff.weatherapp.screens.daily.viewmodels.DailyViewModelFactory
 import ru.binnyatoff.weatherapp.screens.home.viewmodels.HomeViewModelFactory
 import ru.binnyatoff.weatherapp.data.network.Api
+import ru.binnyatoff.weatherapp.usecases.GpsCoordinatesUseCase
 
 @Module
 class AppModule {
 
     @Provides
-    fun provideGPS(context: Context): GPS {
-        return GPS(context)
+    fun provideGPS(context: Context): GpsCoordinatesUseCase {
+        return GpsCoordinatesUseCase(context)
     }
 
     @Provides
@@ -25,14 +24,20 @@ class AppModule {
     }
 
     @Provides
-    fun provideMainViewModelFactory(repository: Repository, gps: GPS): HomeViewModelFactory {
-        return HomeViewModelFactory(repository,gps)
+    fun provideMainViewModelFactory(
+        repository: Repository,
+        gpsCoordinatesUseCase: GpsCoordinatesUseCase,
+    ): HomeViewModelFactory {
+        return HomeViewModelFactory(repository, gpsCoordinatesUseCase)
     }
 
 
     @Provides
-    fun provideDailyViewModelFactory(repository: Repository, gps: GPS): DailyViewModelFactory {
-        return DailyViewModelFactory(repository, gps)
+    fun provideDailyViewModelFactory(
+        repository: Repository,
+        gpsCoordinatesUseCase: GpsCoordinatesUseCase,
+    ): DailyViewModelFactory {
+        return DailyViewModelFactory(repository, gpsCoordinatesUseCase)
     }
 
 }

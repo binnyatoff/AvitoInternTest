@@ -7,7 +7,7 @@ import dagger.Component
 import ru.binnyatoff.weatherapp.screens.daily.DailyFragment
 import ru.binnyatoff.weatherapp.screens.home.HomeFragment
 import ru.binnyatoff.weatherapp.screens.search.SearchFragment
-import ru.binnyatoff.weatherappcompose.data.GPS
+import ru.binnyatoff.weatherapp.usecases.GpsCoordinatesUseCase
 
 
 @Component(modules = [AppModule::class, DataModule::class])
@@ -15,7 +15,7 @@ interface AppComponent {
     fun inject(homeFragment: HomeFragment)
     fun inject(searchFragment: SearchFragment)
     fun inject(dailyFragment: DailyFragment)
-    fun inject(gps: GPS)
+    fun inject(gpsCoordinatesUseCase: GpsCoordinatesUseCase)
 
     @Component.Builder
     interface Builder {

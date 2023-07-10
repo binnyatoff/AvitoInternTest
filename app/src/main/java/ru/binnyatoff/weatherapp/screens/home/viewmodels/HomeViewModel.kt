@@ -11,63 +11,80 @@ import ru.binnyatoff.weatherapp.data.Repository
 import ru.binnyatoff.weatherapp.data.models.Coordinates
 import ru.binnyatoff.weatherapp.data.modelsDTO.CurrentWeatherDTO
 import ru.binnyatoff.weatherapp.data.toCurrentWeather
-import ru.binnyatoff.weatherapp.screens.GPS
+import ru.binnyatoff.weatherapp.screens.home.HomeEvent
 import ru.binnyatoff.weatherapp.screens.home.HomeState
+import ru.binnyatoff.weatherapp.usecases.GpsCoordinatesUseCase
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HomeViewModel(private val weatherRepository: Repository, private val gps: GPS) : ViewModel() {
+class HomeViewModel(
+    private val weatherRepository: Repository,
+    private val gpsCoordinatesUseCase: GpsCoordinatesUseCase,
+) : ViewModel() {
 
     private val _state = MutableLiveData<HomeState>(HomeState.Loading)
-    val state : LiveData<HomeState> = _state
+    val state: LiveData<HomeState> = _state
 
+    val c: Calendar = Calendar.getInstance()
+
+    val year = c.get(Calendar.YEAR)
+    val month = c.get(Calendar.MONTH)
+    val day = c.get(Calendar.DAY_OF_MONTH)
+
+    val hour = c.get(Calendar.HOUR_OF_DAY)
+    val minute = c.get(Calendar.MINUTE)
 
     private var currentDate: String =
         SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 
-    init {
-        getCoordinates()
+    fun obtainEvent(event: HomeEvent) {
+        when (event) {
+            is HomeEvent.ScreenInit -> {
+                getCoordinates()
+            }
+        }
     }
 
     private fun getCoordinates() {
         viewModelScope.launch {
-            gps.getLocate()
-            gps.coordinates.collect { coordinates ->
-                Log.e("TAG", "$coordinates")
+            Log.e("TAG", "Coordinates")
+            gpsCoordinatesUseCase.getLocate()
+            gpsCoordinatesUseCase.coordinates.collect { coordinates ->
                 getWeather(coordinates)
             }
         }
     }
 
-    private suspend fun getWeather(coordinates: Coordinates) {
-        _state.postValue(HomeState.Loading)
-        try {
-            val response: Response<CurrentWeatherDTO> =
-                weatherRepository.getCurrentWeather(coordinates)
-            Log.e("TAG", "$response")
-            if (response.isSuccessful) {
-                val body = response.body()?.toCurrentWeather()
-                if (body != null) {
-                    _state.postValue(
-                        HomeState.Loaded(
-                            icon = body.icon,
-                            temp = body.temp,
-                            humidity = body.humidity,
-                            wind = body.windSpeed,
-                            location = body.location,
-                            currentTime = currentDate
+    private fun getWeather(coordinates: Coordinates) {
+        viewModelScope.launch {
+            try {
+                val response: Response<CurrentWeatherDTO> =
+                    weatherRepository.getCurrentWeather(coordinates)
+                Log.e("TAG", "$response")
+                if (response.isSuccessful) {
+                    val body = response.body()?.toCurrentWeather()
+                    if (body != null) {
+                        _state.postValue(
+                            HomeState.Loaded(
+                                icon = body.icon,
+                                temp = body.temp,
+                                humidity = body.humidity,
+                                wind = body.windSpeed,
+                                location = body.location,
+                                currentTime = currentDate
+                            )
                         )
-                    )
-                } else {
-                    _state.postValue(HomeState.Empty)
+                    } else {
+                        _state.postValue(HomeState.Empty)
+                    }
                 }
+            } catch (e: Exception) {
+                _state.postValue(HomeState.Error(e.toString()))
             }
-        } catch (e: Exception) {
-            _state.postValue(HomeState.Error(e.toString()))
         }
     }
 
-    fun removeUpdatesLocationListener(){
-        gps.removeUpdatesLocationListener()
+    fun removeUpdatesLocationListener() {
+        gpsCoordinatesUseCase.removeUpdatesLocationListener()
     }
 }

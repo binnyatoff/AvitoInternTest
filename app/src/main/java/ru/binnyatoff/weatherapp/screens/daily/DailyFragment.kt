@@ -3,6 +3,7 @@ package ru.binnyatoff.weatherapp.screens.daily
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.binnyatoff.weatherapp.R
 import ru.binnyatoff.weatherapp.appComponent
 import ru.binnyatoff.weatherapp.databinding.FragmentDailyBinding
+import ru.binnyatoff.weatherapp.screens.daily.viewmodels.DailyEvents
 import ru.binnyatoff.weatherapp.screens.daily.viewmodels.DailyState
 import ru.binnyatoff.weatherapp.screens.daily.viewmodels.DailyViewModel
 
@@ -35,6 +37,7 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = DailyAdapter()
 
+
         with(viewBinding) {
             recyclerview.adapter = adapter
             recyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -43,8 +46,17 @@ class DailyFragment : Fragment(R.layout.fragment_daily) {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.state.observe(viewLifecycleOwner){DailyState ->
                 when(DailyState){
+                    is DailyState.Loading ->{
+                        viewModel.obtainEvent(DailyEvents.ScreenInit)
+                    }
                     is DailyState.Loaded -> {
                         adapter.submitList(DailyState.data)
+                    }
+                    is DailyState.Error ->{
+
+                    }
+                    is DailyState.Empty ->{
+
                     }
                 }
 

@@ -6,13 +6,13 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home"/>
     <item
+        android:id="@+id/dailyFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_vector"
+        android:title="@string/daily"/>
+    <item
         android:id="@+id/searchFragment"
         android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search"/>
-    <item
-        android:id="@+id/dailyFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_vector"
-        android:title="@string/forcast"/>
 </menu>

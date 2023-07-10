@@ -15,7 +15,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginBottom="30dp"
         android:textColor="@color/white"
-        android:text="Forecast Report"/>
+        android:text="@string/daily_report"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_WeatherApp)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val navController: NavController =
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)

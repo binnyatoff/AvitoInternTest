@@ -34,7 +34,6 @@ class DailyViewHolder(private val binding: WeatherItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(currentWeatherDaily: DailyMap) {
-        if (currentWeatherDaily != null) {
             binding.date.text = currentWeatherDaily.dt
             binding.temp.text = currentWeatherDaily.temp.max.toString()
             binding.day.text = currentWeatherDaily.pressure.toString()
@@ -46,7 +45,6 @@ class DailyViewHolder(private val binding: WeatherItemBinding) :
                 .load(url)
                 .into(binding.image)
         }
-    }
 }
 
 object DailyDiffUtil :

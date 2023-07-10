@@ -1,10 +1,14 @@
 package ru.binnyatoff.weatherapp.screens.home
 
+import android.Manifest
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -31,8 +35,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onAttach(context)
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val locationPermissionRequest = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
+                    // Precise location access granted.
+                }
+
+                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    // Only approximate location access granted.
+                }
+
+                else -> {
+                    // No location access granted.
+                }
+            }
+        }
+
+        locationPermissionRequest.launch(arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION))
+
 
         with(binding) {
             viewModel.state.observe(viewLifecycleOwner) { state ->
@@ -43,7 +71,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         wind.visibility = View.GONE
                         location.visibility = View.GONE
                         data.visibility = View.GONE
+                        viewModel.obtainEvent(HomeEvent.ScreenInit)
                     }
+
                     is HomeState.Loaded -> {
                         temp.text = state.temp.toString()
                         humidity.text = state.humidity.toString()
@@ -62,6 +92,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             .into(image)
 
                     }
+
                     is HomeState.Empty -> {
                         temp.visibility = View.GONE
                         humidity.visibility = View.GONE
@@ -70,6 +101,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         data.visibility = View.VISIBLE
                         Toast.makeText(requireContext(), "Empty", Toast.LENGTH_SHORT).show()
                     }
+
                     is HomeState.Error -> {
                         temp.visibility = View.GONE
                         humidity.visibility = View.GONE

@@ -10,8 +10,7 @@ import ru.binnyatoff.weatherapp.data.DailyMap
 import ru.binnyatoff.weatherapp.data.Repository
 import ru.binnyatoff.weatherapp.data.models.Coordinates
 import ru.binnyatoff.weatherapp.data.toDailyMap
-import ru.binnyatoff.weatherapp.screens.GPS
-import java.lang.Error
+import ru.binnyatoff.weatherapp.usecases.GpsCoordinatesUseCase
 
 sealed class DailyState() {
     object Loading : DailyState()
@@ -23,31 +22,39 @@ sealed class DailyState() {
     data class Error(val error: String) : DailyState()
 }
 
-class DailyViewModel(private val repository: Repository, private val gps: GPS) : ViewModel() {
+sealed class DailyEvents() {
+    object ScreenInit : DailyEvents()
+}
 
-    private val _state = MutableLiveData<DailyState>()
+class DailyViewModel(
+    private val repository: Repository,
+    private val gpsCoordinatesUseCase: GpsCoordinatesUseCase,
+) : ViewModel() {
+
+    private val _state = MutableLiveData<DailyState>(DailyState.Loading)
     val state: LiveData<DailyState> = _state
 
-    init {
-        getCoordinates()
+    fun obtainEvent(event: DailyEvents) {
+        when (event) {
+            is DailyEvents.ScreenInit -> getCoordinates()
+        }
     }
 
     private fun getCoordinates() {
         viewModelScope.launch {
-            gps.getLocate()
-            gps.coordinates.collect { coordinates ->
-                Log.e("TAG", "$coordinates")
+            Log.e("TAG", "Coordinates")
+            gpsCoordinatesUseCase.getLocate()
+            gpsCoordinatesUseCase.coordinates.collect { coordinates ->
                 getWeatherDaily(coordinates)
             }
         }
     }
 
     private fun getWeatherDaily(coordinates: Coordinates) {
-        _state.postValue(DailyState.Loading)
         viewModelScope.launch {
             try {
                 val response = repository.getDailyWeather(coordinates)
-                Log.e("TAG", "Response$response")
+                Log.e("TAG", "$response")
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {

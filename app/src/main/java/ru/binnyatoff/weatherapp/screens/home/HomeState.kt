@@ -14,3 +14,7 @@ sealed class HomeState {
     object Empty : HomeState()
     data class Error(val error: String) : HomeState()
 }
+
+sealed class HomeEvent(){
+    object ScreenInit: HomeEvent()
+}
