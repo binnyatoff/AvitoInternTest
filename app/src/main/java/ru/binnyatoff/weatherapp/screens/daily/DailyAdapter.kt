@@ -7,8 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ru.binnyatoff.weatherapp.data.DailyMap
-
-import ru.binnyatoff.weatherapp.data.modelsDTO.Daily
 import ru.binnyatoff.weatherapp.databinding.WeatherItemBinding
 
 
