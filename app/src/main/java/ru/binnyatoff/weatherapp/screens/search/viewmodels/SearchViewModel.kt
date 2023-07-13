@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.binnyatoff.weatherapp.data.modelsDTO.CurrentWeatherDTO
 import ru.binnyatoff.weatherapp.data.network.Api
-import java.lang.Error
 
 sealed class SearchViewState() {
     object Loading : SearchViewState()
@@ -23,14 +22,14 @@ sealed class SearchViewState() {
 class SearchViewModel(private val api: Api) : ViewModel() {
 
     private val _currentWeather = MutableLiveData<SearchViewState>(SearchViewState.Empty)
-    private val cityNameList: MutableList<String> = mutableListOf("London")
+    private val cityNameList: MutableList<String> = mutableListOf()
 
     private val currentWeatherDTOList: MutableList<CurrentWeatherDTO> = mutableListOf()
     val currentWeather: LiveData<SearchViewState> = _currentWeather
 
     fun getCityWeather(city: String) {
         _currentWeather.postValue(SearchViewState.Loading)
-        if (city !in cityNameList){
+        if (city !in cityNameList) {
             cityNameList.add(city)
         }
         cityNameList.forEach { cityName ->
@@ -41,9 +40,8 @@ class SearchViewModel(private val api: Api) : ViewModel() {
                     if (response.isSuccessful) {
                         val body = response.body()
                         if (body != null) {
-                            if (body !in currentWeatherDTOList){
-                                currentWeatherDTOList += body
-                                //currentWeatherDTOList.add(body)
+                            if (body !in currentWeatherDTOList) {
+                                currentWeatherDTOList.add(body)
                             }
                         }
                         Log.e("TAG", body.toString())

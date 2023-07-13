@@ -32,9 +32,8 @@ class DailyViewHolder(private val binding: WeatherItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(currentWeatherDaily: DailyMap) {
-            binding.date.text = currentWeatherDaily.dt
             binding.temp.text = currentWeatherDaily.temp.max.toString()
-            binding.day.text = currentWeatherDaily.pressure.toString()
+            binding.day.text = currentWeatherDaily.dt
 
             val url = currentWeatherDaily.icon
 

@@ -1,7 +1,6 @@
 package ru.binnyatoff.weatherapp.screens.search
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -34,7 +33,6 @@ class SearchViewHolder(private val binding: WeatherItemBinding) :
     fun bind(currentWeatherDaily: CurrentWeatherDTO) {
         binding.temp.text = currentWeatherDaily.main.temp.toString()
         binding.day.text = currentWeatherDaily.name
-        binding.date.visibility = View.GONE
 
         val url = currentWeatherDaily.weather[0].icon.toWeatherIcon()
 

@@ -54,11 +54,11 @@ class DailyViewModel(
         viewModelScope.launch {
             try {
                 val response = repository.getDailyWeather(coordinates)
-                Log.e("TAG", "$response")
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
                         val data = body.toDailyMap()
+                        Log.e("TAG", "$data")
                         _state.postValue(
                             DailyState.Loaded(data)
                         )

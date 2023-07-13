@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -44,7 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         ) { permissions ->
             when {
                 permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    // Precise location access granted.
+                    viewModel.obtainEvent(HomeEvent.ScreenInit)
                 }
 
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {

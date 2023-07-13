@@ -17,4 +17,5 @@
     <string name="pick_a_location">Pick a location</string>
     <string name="pick_description">Type the area or city you want to know the \n detailed weather information \n at this time.</string>
     <string name="daily_report">Daily Report</string>
+    <string name="weather_image">weather_image</string>
 </resources>
